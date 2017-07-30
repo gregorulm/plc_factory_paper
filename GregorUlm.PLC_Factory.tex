@@ -42,13 +42,15 @@
 
 \usepackage{svg}
 
-\usepackage{draftwatermark}
-\SetWatermarkText{Draft 2017-07-02}
-\SetWatermarkScale{0.7}
-\SetWatermarkLightness{0.9}
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Draft 2017-07-02}
+%\SetWatermarkScale{0.7}
+%\SetWatermarkLightness{0.9}
 
 \usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
+  
 %
 % if BibLaTeX is used
 %
@@ -80,7 +82,7 @@
 
 \title{ PLC Factory: Automating routine tasks in large-scale PLC software development}
 
-\author{G. Ulm\thanks{gregor.ulm@alumni.lse.ac.uk}\textsuperscript{1}, D. Brodrick, N. Levchenko, F. Bellorini, R. Fernandes, D. Piso Fernandez,\\ European Spallation Source ERIC, Lund, Sweden\\
+\author{G. Ulm\thanks{gregor.ulm@alumni.lse.ac.uk}\textsuperscript{1}, F. Bellorini, D. Brodrick, R. Fernandes, N. Levchenko, D. Piso Fernandez,\\ European Spallation Source ERIC, Lund, Sweden\\
 		\textsuperscript{1}also at Chalmers University of Technology, Gothenburg, Sweden
 		}
 	
@@ -128,14 +130,14 @@ The first problem is straightforward as it is based on a simple database lookup.
 
 
 \section{Solution}
-PLC Factory is an application written in Python 2.7 that automates the three kinds of substitutions we just outlined.\footnote{PLC Factory is an open-source product that has been made available by ESS at the following repository: \url{https://bitbucket.org/europeanspallationsource/ics_plc_factory} } Those automatic substitutions remove most if not all of the repetition we encounter when engaging in large-scale PLC software development. Starting with the foundational concept of a \emph{dependency tree}, we are going to describe the steps PLC Factory performs in successively greater detail. After presenting a high-level overview, we will move on to pseudocode and eventually dissect PLCF$^\sharp$, the embedded domain specific language that is at the core of PLC Factory, and which enables the expressivity and flexibility we are about to discuss.
+PLC Factory is an application written in Python 2.7 that automates the three kinds of substitutions we just outlined.\footnote{PLC Factory is an open-source product, licensed under the third version of the GNU General Public License (GNU GPLv3). The source code  is available at the following repository: \texttt{https://bitbucket.org/\linebreak europeanspallationsource/ics_plc_factory}.} Those automatic substitutions remove most if not all of the repetition we encounter when engaging in large-scale PLC software development. Starting with the foundational concept of a \emph{dependency tree}, we are going to describe the steps PLC Factory performs in successively greater detail. After presenting a high-level overview, we will move on to pseudocode and eventually dissect PLCF$^\sharp$, the embedded domain specific language that is at the core of PLC Factory, and which enables the expressivity and flexibility we are about to discuss.
 
 \subsection{Dependency Trees}
 Since CCDB describes dependency relationships between devices, this information can be used to construct a \emph{dependency tree} that explicitly models those relationships. Let us present a simple example: Consider an element $r$, which is the starting point for PLC Factory and the root of the tree we intend to construct. The root device $r$ controls the devices $u_1$ and $u_2$, of which the former controls $v_{11}$ and $v_{12}$, and the latter $v_{21}$. This is illustrated in Fig.\ \ref{fig:deviceTree}. In a production setting such a tree can be arbitrarily deep. Every unique device is of a particular device type, for instance a PLC or a vacuum pump. A dependency tree may contain several devices that are of the same device type.
 
 \begin{figure}[h]
 \centering
-  \includegraphics[scale=0.9]{figures/deviceTree.pdf}
+  \includegraphics[scale=0.8]{figures/deviceTreeCropped.eps}
   \caption{Example of a dependency tree. Different shadings indicate different device types.}
   \label{fig:deviceTree}
 \end{figure}
