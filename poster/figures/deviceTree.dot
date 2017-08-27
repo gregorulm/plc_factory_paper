@@ -1,0 +1,19 @@
+graph {
+  node [ shape="circle", fixedsize=true];
+  r    [label=<<I>r</I>>];
+  u_1  [label=<<I>u</I><SUB>1</SUB>>];
+  u_2  [label=<<I>u</I><SUB>2</SUB>>];
+  v_11 [label=<<I>v</I><SUB>11</SUB>>];
+  v_12 [label=<<I>v</I><SUB>12</SUB>>];
+  v_21 [label=<<I>v</I><SUB>21</SUB>>];
+  r   -- u_1;
+	r   -- u_2;
+  u_1 -- v_11  
+	u_1 -- v_12;
+	u_2 -- v_21;
+	u_1  [style=filled, color=gray35]
+	u_2  [style=filled, color=gray35]
+	v_11 [style=filled, color=gray61]
+  v_21 [style=filled, color=gray61]
+	v_12 [style=filled, color=gray91]
+}
